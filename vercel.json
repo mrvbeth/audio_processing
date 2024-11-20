@@ -1,24 +1,16 @@
 {
-    "version": 2,
-    "builds": [
-      {
+    "builds": [{
         "src": "audio-processing/wsgi.py",
         "use": "@vercel/python",
-        "config": { 
-          "maxLambdaSize": "15mb", 
-          "runtime": "python3.9" 
-        }
-      }
-    ],
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    }],
     "routes": [
-      {
-        "src": "/upload/",
-        "dest": "audio-processing/wsgi.py"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "audio-processing/wsgi.py"
-      }
+        {
+            "src": "/(.*)",
+            "dest": "audio-processing/wsgi.py"
+        }
+    ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
     ]
-  }
-  
+}
