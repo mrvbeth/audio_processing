@@ -1,16 +1,13 @@
 {
+    "version": 2,
     "builds": [
         {
-            "src": "build_files.sh",
-            "use": "@vercel/static-build",
+            "src": "audio-processing/wsgi.py",
+            "use": "@vercel/python",
             "config": {
-              "distDir": "staticfiles_build"
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
             }
-        },
-        {
-        "src": "audio-processing/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb" }
         }
     ],
     "routes": [
