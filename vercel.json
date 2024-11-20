@@ -9,8 +9,5 @@
             "src": "/(.*)",
             "dest": "audio-processing/wsgi.py"
         }
-    ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/" }
     ]
 }
