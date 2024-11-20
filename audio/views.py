@@ -5,22 +5,12 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 
 @csrf_exempt
 def upload_audio(request):
-    if request.method == "POST" and request.FILES['audio']:
-        audio_file = request.FILES['audio']
-        fs = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'uploads'))
-        filename = fs.save(audio_file.name, audio_file)
-        audio_path = os.path.join(settings.BASE_DIR, 'uploads', filename)
+    return HttpResponse("Welcome to the Audio Processing App!")
 
-        # Process the audio using Spleeter (this assumes you want to use 2 stems separation)
-        output_dir = os.path.join(settings.BASE_DIR, 'outputs', filename.split('.')[0])
-        subprocess.run(['spleeter', 'separate', '-p', 'spleeter:2stems', '-o', output_dir, audio_path])
-
-        return JsonResponse({'message': 'File uploaded and processing started.'})
-
-    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 def download_audio(request, filename):
     output_file = os.path.join(settings.BASE_DIR, 'outputs', filename, 'vocals.wav')
